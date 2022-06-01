@@ -1,5 +1,7 @@
 package su22.sof3021.controllers.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -60,6 +62,9 @@ public class AccountController {
 		@RequestParam(name="page", defaultValue="0") Integer page,
 		@RequestParam(name="size", defaultValue="10") Integer size
 	) {
+		List<Account> ds = this.accountRepo.findByUsernameLike("tiennh");
+		System.out.println(ds.get(0).getEmail());
+		
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Account> data = this.accountRepo.findAll(pageable);
 		model.addAttribute("data", data);
